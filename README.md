@@ -39,7 +39,7 @@ $ gem install jekyll
 ```
 
 ```python
-$ may.info()
+may.info()
 ```
 
 **Windows users:** Windows users have a bit more work to do, but luckily [@juthilo](https://github.com/juthilo) has your back with his [Run Jekyll on Windows](https://github.com/juthilo/run-jekyll-on-windows) guide.
