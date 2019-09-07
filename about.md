@@ -6,7 +6,7 @@ title: About me
 <p class="message">
   Hi!
 </p>
-My name is Ayman Al Ghamdi, computer science specialist, my interest area is on:
+My name is Aiman Al Ghamdi, computer science specialist, my interest area is on:
   * data science
   *artificial intelligence 
   * machine learning 
