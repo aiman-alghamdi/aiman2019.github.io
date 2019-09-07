@@ -3,7 +3,7 @@ permalink:           pretty
 
 # Setup
 title:               aiman alghamdi
-tagline:             A Moderately Okay Data Science Blog
+tagline:             Data Science Blog
 url:                 https://aiman2019.github.io/
 paginate:            2
 baseurl:             ""
@@ -18,7 +18,7 @@ sass:
 # About/contact
 author:
   name:              aiman2019
-  url:               https://twitter.com/zaglamir
+  url:               
   email:             aiman.m.alghamdi@gmail.com
 
 # Custom vars
