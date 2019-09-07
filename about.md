@@ -5,6 +5,7 @@ title: About
 
 <p class="message">
   Hi!
+</p>
 My name is Ayman Al Ghamdi, computer science specialist, my interest area is on:
   * data science
   *artificial intelligence 
@@ -12,8 +13,7 @@ My name is Ayman Al Ghamdi, computer science specialist, my interest area is on:
   * high performance computing 
   
   here you will find some of my projects!
-</p>
-
+<br/>
 contact with me :
 * [Aiman ALghamdi](http://linkedin.com/in/aiman-alghamdi)
 
