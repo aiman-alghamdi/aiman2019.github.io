@@ -1,0 +1,123 @@
+---
+layout: post
+title: Project-01 MTA Turnstile Analysis 
+---
+![Image1]({{site.url}}/images/index.png)
+
+## Introduction: 
+
+This project takes a case of a company called WomenTechWomenYes and they have a gala which they want the people to come to.<br /> And they want to send some of their workers to collect attendance sign ups from subway stations. <br /> And our role is to help them decide which station they should send their workers to and at what time also. 
+
+
+
+
+## Strategy:
+
+We decided that we want to find the most crowded stations at their peak times so that the company could send their workers to these stations at the best times to increase the chances of sign ups. We chose this decision based on the data that was available. 
+
+## Approach: 
+We followed 3 steps in our approach, which are: 
+ * ### Collecting the data:
+We collected the data from MTA Data which was available freely for every one.
+* ### understanding the data: 
+After collecting the data we started to understand the data to gain the necessary domain knowledge
+* ### data analysis: 
+At this step we cleaned the data and then analyzed it to find the busiest stations in terms of total flow (number of entries + number of exits). And we also found the busiest times at these stations
+## cleaning:
+Before we start any data science project, we should clean the dataset and make sure the data are ready to analyse.<br/>
+here is the code for cleaning the dataset:
+
+```python
+# get the dataset of one month (may-2019)
+def get_weeks(weekList):
+    df_list=[pd.read_csv("http://web.mta.info/developers/data/nyct/turnstile/turnstile_{}.txt".format(week)) for week in weekList]
+    return pd.concat(df_list)
+# reading the dataset
+may=get_weeks(weeks)
+#make sure there is no space in columns name
+may.columns=may.columns.str.strip()
+# make a new colunms for data and time
+may["DATE_TIME"] = pd.to_datetime(may.DATE + " " + may.TIME, format="%m/%d/%Y %H:%M:%S")
+# drop colunms we dont need
+may.drop(['C/A','LINENAME','DIVISION','DESC'], axis=1, inplace=True)
+#get the correct value of ENTRIES and EXITS
+may['ENTRIES'] = may.ENTRIES.shift(-1)-may.ENTRIES
+may['EXITS'] = may.EXITS.shift(-1) - may.EXITS
+# to remove outliers 
+may = may[(may.ENTRIES > 0) & (may.ENTRIES < 5000) & 
+                (may.EXITS > 0) & (may.EXITS < 5000)]
+# add a new column called Flow 
+may["flow"]=may["EXITS"]+may['ENTRIES']
+
+```
+now we are ready to explore the dataset.
+
+## Exploring the data:
+
+ After making some changes and cleaning for the detaset, here are some exploring of the date set.
+
+* the dataset have 10 atrubute 
+* 5 atrbiute have object data type, and 3 have a flot and 2 hvae datatime data type.<br/>
+and here a picture of the first 5 rows:
+![Image2]({{site.url}}/images/pro2.jpg)
+
+
+## visualization: 
+
+### Busiest day all stations
+![Image3]({{site.url}}/images/Flow_over_the_day.png)
+```
+here we can see that the woek days has more flow than the weekend days
+```
+### Peak hours for all stations
+![Image4]({{site.url}}/images/Rush_hours.png)
+```
+In this graph we can see the rush ours ovre the day on may-2019 
+```
+### Top 10 hours
+![Image5]({{site.url}}/images/Top_10_ho.png)
+```
+
+4pm which is the time for come back form work, and 8 am which is the time for going to work, it's in the top of the list
+
+```
+### top 5 station 
+![Image6]({{site.url}}/images/Top_5.png)
+```
+
+here are the top 5 station 
+
+```
+### top 5 units on top station
+
+![Image7]({{site.url}}/images/units.png)
+```
+
+there is many unit in each stations,this the top 5 units on the top station (34 ST-PENN STA)
+
+```
+
+## Result 
+
+After analyzing our dataset, our recommendation to the clint is:
+![Image8]({{site.url}}/images/pro4.jpg)
+* we recommend these stations:
+    * 34 ST-PENN STA, 
+    * GRD Central-42 ST,
+    * 34 ST-Herald SQ,
+    * 14 ST-Union SQ, 
+    * 32 ST 15.
+* we recommend to go at:
+    * 8 AM
+    * 12 PM
+    * 4 PM
+* finally we recommend them to work on:
+    * Tuesday, 
+    * Monday, 
+    * Wednesday
+
+
+Thanks for reading!
+
+
+[Aiman ALghamdi](http://linkedin.com/in/aiman-alghamdi)
